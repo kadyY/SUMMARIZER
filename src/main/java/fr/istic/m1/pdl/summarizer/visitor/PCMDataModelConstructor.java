@@ -67,6 +67,9 @@ public class PCMDataModelConstructor implements PCMVisitor {
 
 	public void visit(FeatureGroup featureGroup) {
 		// TODO Auto-generated method stub
+		for (AbstractFeature feature : featureGroup.getFeatures()) {
+			feature.accept(this);
+		}
 
 	}
 

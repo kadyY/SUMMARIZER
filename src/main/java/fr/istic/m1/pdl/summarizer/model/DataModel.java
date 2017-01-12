@@ -41,22 +41,24 @@ public class DataModel {
 	 * @return
 	 */
 
-	public List<List<Number>> getAllQuantitativeValues() {
-		// FIXME - choisir le bon format de retour selon le besoin
-		List<List<Number>> result = new ArrayList<>();
 
-		int i = 0;
+	public Map<String, List<Number>> getAllQuantitativeValues() {
+
+		Map<String, List<Number>> result = new HashMap<>();
+
 		for (Column column : this.columns) {
 			List<Number> cValues = new ArrayList<Number>();
 			if (column.getType().equals(TypeColumn.Number)) {
 				for (ColumnValue value : column.getValues()) {
 					cValues.add((Number) value.getValue());
+
 				}
+				result.put(column.getName(), cValues);
 			}
-			result.add(cValues);
 		}
 		return result;
 	}
+
 
 	/**
 	 * Permet de reucperer toutes les valeurs qualitatives.
@@ -75,12 +77,38 @@ public class DataModel {
 				for (ColumnValue value : column.getValues()) {
 					cValues.add(value.getValue().toString());
 				}
+				result.add(cValues);
 			}
-			result.add(cValues);
 		}
 		return result;
 	}
 
+	/**
+	 * Permet de reucperer toutes les valeurs qualitatives par feature.
+	 * {@link Column#getType()}
+	 * 
+	 * @return
+	 */
+	public HashMap<String, List<String>> getAllQualitativeValues2() {
+		// FIXME - choisir le bon format de retour selon le besoin
+		HashMap<String, List<String>> result = new HashMap<>();
+
+		int i = 0;
+		for (Column column : this.columns) {
+			List<String> cValues = new ArrayList<String>();
+			if (column.getType().equals(TypeColumn.String)) {
+				for (ColumnValue value : column.getValues()) {
+					cValues.add(value.getValue().toString());
+				}
+				result.put(column.getName(), cValues);
+			}
+		}
+		return result;
+	}
+	
+	
+	
+	
 	/**
 	 * @param type
 	 * @return le nombre de cellule dont le type vaut type
@@ -101,13 +129,15 @@ public class DataModel {
 	public int size() {
 		return columns.size();
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		for(Column c : columns){
+		for (Column c : columns) {
 			buffer.append(c + "\n");
 		}
 		return buffer.toString();
 	}
+
 }
+	

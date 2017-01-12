@@ -1,9 +1,11 @@
 package fr.istic.m1.pdl.summarizer.model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represente une Future dans le cas d'un PCM
+
 public class Column {
 
 	private String name;
@@ -67,7 +69,7 @@ public class Column {
 	 * @return une copie de la liste
 	 */
 	public List<ColumnValue> getValues() {
-		return new ArrayList<>(values);
+		return new ArrayList<ColumnValue>(values);
 	}
 	
 	@Override
